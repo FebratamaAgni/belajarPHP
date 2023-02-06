@@ -27,18 +27,20 @@ $mahasiswa = query("SELECT * FROM mahasiswa");
             <th>Email</th>
             <th>Jurusan</th>
         </tr>
+        <?php $i = 1; ?>
         <?php foreach ($mahasiswa as $mhs) : ?>
             <tr>
-                <td><?php echo $mhs["id"]; ?></td>
+                <td><?php echo $i; ?></td>
                 <td>
                     <a href="">Ubah</a> |
-                    <a href="">Hapus</a>
+                    <a href="hapus.php?id=<?php echo $mhs["id"]; ?>" onclick="return confirm('Yakin menghapus data?');">Hapus</a>
                 </td>
                 <td><?php echo $mhs["npm"]; ?></td>
                 <td><?php echo $mhs["nama"]; ?></td>
                 <td><?php echo $mhs["email"]; ?></td>
                 <td><?php echo $mhs["jurusan"]; ?></td>
             </tr>
+            <?php $i++; ?>
         <?php endforeach; ?>
     </table>
 </body>

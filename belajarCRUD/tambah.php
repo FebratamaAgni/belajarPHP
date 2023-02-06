@@ -1,17 +1,22 @@
 <?php
-// koneksi ke database
-$db = mysqli_connect("localhost", "root", "090807", "phpdasar");
-
+require "function.php";
 if (isset($_POST["submit"])) {
-    // ambil data dari tiap variabel dalam form
-    $nama = $_POST["nama"];
-    $npm = $_POST["npm"];
-    $email = $_POST["email"];
-    $jurusan = $_POST["jurusan"];
-
-    // query insert data
-    $insert = "INSERT INTO mahasiswa (nama, npm, email, jurusan) VALUES ('$nama', '$npm', '$email', '$jurusan')";
-    mysqli_query($db, $insert);
+    // cek apakah data berhasil ditambahkan atau tidak
+    if (tambah($_POST) > 0) {
+        echo "
+        <script>
+        alert('data berhasil ditambahkan!');
+        document.location.href = 'index.php';
+        </script>
+        ";
+    } else {
+        echo "
+        <script>
+        alert('data gagal ditambahkan!');
+        document.location.href = 'index.php';
+        </script>
+        ";
+    }
 };
 ?>
 <!DOCTYPE html>
@@ -30,19 +35,19 @@ if (isset($_POST["submit"])) {
         <ul>
             <li>
                 <label for="nama">Masukkan Nama Mahasiswa: </label>
-                <input type="text" name="nama" id="nama">
+                <input type="text" name="nama" id="nama" required>
             </li>
             <li>
                 <label for="npm">Masukkan NPM Mahasiswa: </label>
-                <input type="text" name="npm" id="npm">
+                <input type="text" name="npm" id="npm" required>
             </li>
             <li>
                 <label for="email">Masukkan Email Mahasiswa: </label>
-                <input type="text" name="email" id="email">
+                <input type="text" name="email" id="email" required>
             </li>
             <li>
                 <label for="jurusan">Masukkan Jurusan Mahasiswa: </label>
-                <input type="text" name="jurusan" id="jurusan">
+                <input type="text" name="jurusan" id="jurusan" required>
             </li>
             <li>
                 <button type="submit" name="submit">Tambah Data!</button>

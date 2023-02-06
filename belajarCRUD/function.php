@@ -11,3 +11,28 @@ function query($query)
     }
     return $box;
 }
+
+function tambah($tambah)
+{
+    global $db;
+    // ambil data dari tiap variabel dalam form
+    $nama = htmlspecialchars($tambah["nama"]);
+    $npm = htmlspecialchars($tambah["npm"]);
+    $email = htmlspecialchars($tambah["email"]);
+    $jurusan = htmlspecialchars($tambah["jurusan"]);
+    // htmlspecialchars() berfungsi sebagai melihat script html jika ditambahkan pada form yg telah dibuat.
+
+    // query insert data
+    $insert = "INSERT INTO mahasiswa (nama, npm, email, jurusan) 
+                VALUES ('$nama', '$npm', '$email', '$jurusan')";
+    mysqli_query($db, $insert);
+
+    return mysqli_affected_rows($db);
+}
+
+function hapus($hapus)
+{
+    global $db;
+    mysqli_query($db, "DELETE FROM mahasiswa WHERE id = $hapus");
+    return mysqli_affected_rows($db);
+}
