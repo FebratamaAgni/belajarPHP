@@ -36,3 +36,21 @@ function hapus($hapus)
     mysqli_query($db, "DELETE FROM mahasiswa WHERE id = $hapus");
     return mysqli_affected_rows($db);
 }
+
+function ubah($ubah)
+{
+    global $db;
+    $id = $ubah["id"];
+    $nama = htmlspecialchars($ubah["nama"]);
+    $npm = htmlspecialchars($ubah["npm"]);
+    $email = htmlspecialchars($ubah["email"]);
+    $jurusan = htmlspecialchars($ubah["jurusan"]);
+    // htmlspecialchars() berfungsi sebagai melihat script html jika ditambahkan pada form yg telah dibuat.
+
+    // query update data
+    $update = "UPDATE mahasiswa SET nama = '$nama', npm = '$npm', email = '$email', 
+    jurusan = '$jurusan' WHERE id = '$id'";
+    mysqli_query($db, $update);
+
+    return mysqli_affected_rows($db);
+}
