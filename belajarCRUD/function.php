@@ -64,3 +64,37 @@ function cari($cari)
     $query = "SELECT * FROM mahasiswa WHERE nama LIKE '%$cari%' OR npm LIKE '%$cari%'";
     return query($query);
 }
+
+// fungsi daftar akun
+function daftar($daftar)
+{
+    global $db;
+    $username = strtolower(stripslashes($daftar["username"]));
+    $password = mysqli_real_escape_string($db, $daftar["password"]);
+    $password2 = mysqli_real_escape_string($db, $daftar["password2"]);
+
+    // cek username suah terdaftar atau belum
+    $user = mysqli_query($db, "SELECT username FROM user WHERE username = '$username'");
+    if (mysqli_fetch_assoc($user)) {
+        echo "<script>
+        alert('Username sudah terdaftar!')
+        </script>";
+        return false;
+    }
+
+    // cek konfirmasi password
+    if ($password !== $password2) {
+        echo "<script>
+        alert('Password dan Konfirmasi Password tidak sama!');
+        </script>";
+        return false;
+    }
+
+    // enkripsi password
+    $enkripsi = password_hash($password, PASSWORD_DEFAULT);
+
+    // query daftar akun
+    mysqli_query($db, "INSERT INTO user (username, password) VALUES ('$username', '$enkripsi')");
+
+    return mysqli_affected_rows($db);
+}
