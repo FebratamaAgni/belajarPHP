@@ -12,6 +12,7 @@ function query($query)
     return $box;
 }
 
+// fungsi tambah data
 function tambah($tambah)
 {
     global $db;
@@ -30,6 +31,7 @@ function tambah($tambah)
     return mysqli_affected_rows($db);
 }
 
+// fungsi hapus data
 function hapus($hapus)
 {
     global $db;
@@ -37,6 +39,7 @@ function hapus($hapus)
     return mysqli_affected_rows($db);
 }
 
+// fungsi ubah data
 function ubah($ubah)
 {
     global $db;
@@ -53,4 +56,11 @@ function ubah($ubah)
     mysqli_query($db, $update);
 
     return mysqli_affected_rows($db);
+}
+
+// fungsi cari data
+function cari($cari)
+{
+    $query = "SELECT * FROM mahasiswa WHERE nama LIKE '%$cari%' OR npm LIKE '%$cari%'";
+    return query($query);
 }

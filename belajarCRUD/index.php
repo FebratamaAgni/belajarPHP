@@ -2,7 +2,13 @@
 // Koneksi ke database mysql
 require "function.php";
 
+// melihat semua isi database
 $mahasiswa = query("SELECT * FROM mahasiswa");
+
+// ketika menggunakan fitur pencarian
+if (isset($_POST["cari"])) {
+    $mahasiswa = cari($_POST["search"]);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +23,14 @@ $mahasiswa = query("SELECT * FROM mahasiswa");
 <body>
     <h1>Belajar database</h1>
     <a href="tambah.php">Tambah data Mahasiswa</a>
-    <br> <br>
+    <br><br>
+
+    <form action="" method="post">
+        <input type="text" name="search" size="30" autocomplete="off" placeholder="Masukkan keyword untuk pencarian..">
+        <button type="submit" name="cari">Cari!</button>
+    </form>
+    <br>
+
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <th>No.</th>
