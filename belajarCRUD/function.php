@@ -49,7 +49,7 @@ function ubah($ubah)
 
     // query update data
     $update = "UPDATE mahasiswa SET nama = '$nama', npm = '$npm', email = '$email', 
-    jurusan = '$jurusan' WHERE id = '$id'";
+    jurusan = '$jurusan' WHERE id = $id";
     mysqli_query($db, $update);
 
     return mysqli_affected_rows($db);
