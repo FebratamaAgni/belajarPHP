@@ -73,7 +73,7 @@ function daftar($daftar)
     $password = mysqli_real_escape_string($db, $daftar["password"]);
     $password2 = mysqli_real_escape_string($db, $daftar["password2"]);
 
-    // cek username suah terdaftar atau belum
+    // cek username sudah terdaftar atau belum
     $user = mysqli_query($db, "SELECT username FROM user WHERE username = '$username'");
     if (mysqli_fetch_assoc($user)) {
         echo "<script>

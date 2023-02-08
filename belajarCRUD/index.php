@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (!isset($_SESSION["login"])) {
+    header("Location: login.php");
+    exit;
+}
+
 // Koneksi ke database mysql
 require "function.php";
 
@@ -21,8 +28,9 @@ if (isset($_POST["cari"])) {
 </head>
 
 <body>
-    <h1>Belajar database</h1>
+    <h1>Halaman Admin</h1>
     <a href="tambah.php">Tambah data Mahasiswa</a>
+    <a style="margin-left: 15px;" href="logout.php">Logout!</a>
     <br><br>
 
     <form action="" method="post">

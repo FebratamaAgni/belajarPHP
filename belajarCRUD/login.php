@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (isset($_SESSION["login"])) {
+    header("Location: index.php");
+    exit;
+}
+
 require "function.php";
 
 if (isset($_POST["login"])) {
@@ -12,6 +19,9 @@ if (isset($_POST["login"])) {
         // cek password
         $result = mysqli_fetch_assoc($user);
         if (password_verify($password, $result["password"])) {
+            // set session
+            $_SESSION["login"] = true;
+
             header("Location: index.php");
             exit;
         }
